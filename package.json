@@ -1,0 +1,83 @@
+{
+  "version": "0.14.6",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "description": "A very early experimental work-in-progress package to help provide game engine functionality for react-three-fiber",
+  "keywords": [
+    "react",
+    "react-three-fiber",
+    "threejs",
+    "three",
+    "game",
+    "engine"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/simonghales/react-three-game-engine#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonghales/react-three-game-engine.git"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build-worker": "tsdx build --entry src/main/worker/worker.ts --name worker && rm -rf temp && mkdir temp && mv dist/* temp/",
+    "build-worker-final": "mkdir dist/worker && mv temp/* dist/worker && rm -rf temp",
+    "build-worker-app": "tsdx build --entry src/main/worker/app/index.tsx --name physicsApp && rm -rf temp3 && mkdir temp3 && mv dist/* temp3/",
+    "build-worker-app-final": "mkdir dist/worker/app && mv temp3/* dist/worker/app && rm -rf temp3",
+    "build-logic-worker": "tsdx build --entry src/logic/logicWorkerApp/index.tsx --name workerApp && rm -rf temp2 && mkdir temp2 && mv dist/* temp2/",
+    "build-logic-worker-final": "mkdir dist/logicWorkerApp && mv temp2/* dist/logicWorkerApp && rm -rf temp2",
+    "build": "npm run build-logic-worker && npm run build-worker && npm run build-worker-app && tsdx build && npm run build-worker-final && npm run build-worker-app-final && npm run build-logic-worker-final",
+    "local-build": "yalc publish --push",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "npm run build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "peerDependencies": {
+    "@react-three/drei": ">=3.3",
+    "planck-js": ">=0.3",
+    "react": ">=16.13",
+    "react-dom": ">=16.13",
+    "react-three-fiber": ">=5.0",
+    "typescript": ">=3.9"
+  },
+  "husky": {
+    "hooks": {}
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "name": "react-three-game-engine",
+  "module": "dist/react-three-game-engine.esm.js",
+  "size-limit": [],
+  "devDependencies": {
+    "@react-three/drei": "^3.3.0",
+    "@size-limit/preset-small-lib": "^4.9.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "husky": "^4.3.6",
+    "planck-js": "^0.3.23",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-three-fiber": "^5.3.11",
+    "size-limit": "^4.9.1",
+    "three": "^0.124.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "react-nil": "^0.0.3",
+    "valtio": "^0.5.2"
+  }
+}
